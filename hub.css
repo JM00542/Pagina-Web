@@ -1,0 +1,283 @@
+/* =========================================================
+   NEXXORA · PÁGINA PRINCIPAL
+   Cambia el color principal editando estas variables
+   ========================================================= */
+:root {
+  --bg: #05010d;
+  --text: #f1eafc;
+  --muted: #b9a3dd;
+  --accent: #b266ff;          /* morado de acento */
+  --glow: #7a1fd6;            /* brillo de la esquina */
+  --line: rgba(255, 255, 255, 0.14);
+  --font: "Space Grotesk", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--bg);
+  overflow-x: clip;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: none;
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  font-size: 17px;
+}
+
+a {
+  color: inherit;
+}
+
+/* =========================================================
+   GRANO (igual que NECIO)
+   ========================================================= */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain 1s steps(6) infinite;
+}
+
+@keyframes grain {
+  0%   { background-position: 0 0; }
+  20%  { background-position: -30px 20px; }
+  40%  { background-position: 20px -30px; }
+  60%  { background-position: -20px -10px; }
+  80%  { background-position: 30px 30px; }
+  100% { background-position: 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
+}
+
+/* =========================================================
+   PANTALLA PRINCIPAL (mismo diseño que la entrada de NECIO)
+   ========================================================= */
+.gate {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 70% 30%, var(--glow) 0%, transparent 70%),
+    radial-gradient(ellipse at 15% 85%, rgba(122, 31, 214, 0.45) 0%, transparent 55%);
+}
+
+.gate h1 {
+  font-size: clamp(3rem, 14vw, 9rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-shadow: 0 0 70px rgba(178, 102, 255, 0.55);
+}
+
+.gate p {
+  max-width: 60ch;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.gate p + p {
+  margin-top: -12px;
+}
+
+.artists {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-block;
+  min-width: 240px;
+  padding: 12px 26px;
+  border: 1px solid var(--accent);
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn.fill {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+a.btn:hover,
+a.btn:focus-visible {
+  background: var(--accent);
+  color: var(--bg);
+  outline: none;
+}
+
+a.btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent);
+}
+
+/* Espacio libre para futuros artistas */
+.btn--empty {
+  border-style: dashed;
+  border-color: var(--line);
+  color: var(--muted);
+  opacity: 0.6;
+  cursor: default;
+}
+
+
+/* =========================================================
+   CONTACTO
+   ========================================================= */
+.artists + .btn {
+  margin-top: 28px;
+}
+
+.contact-modal[hidden] {
+  display: none !important;
+}
+
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  background: rgba(5, 1, 13, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.contact-modal__box {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  padding: 34px 26px 26px;
+  background: rgba(18, 6, 36, 0.97);
+  border: 1px solid rgba(178, 102, 255, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.55);
+  animation: contactIn 0.25s ease-out;
+}
+
+.contact-modal__close {
+  position: absolute;
+  top: 9px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.contact-modal__close:hover,
+.contact-modal__close:focus-visible {
+  color: var(--accent);
+}
+
+.contact-modal__box h2 {
+  margin-bottom: 8px;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.contact-modal__description {
+  margin-bottom: 22px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.contact-modal__box form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-modal__box label {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.contact-modal__box input {
+  width: 100%;
+  padding: 12px;
+  background: rgba(5, 1, 13, 0.8);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  outline: none;
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.contact-modal__box input {
+  color-scheme: dark;
+}
+
+.contact-modal__box input:focus {
+  border-color: var(--accent);
+}
+
+.contact-modal__box input::placeholder {
+  color: #7a6a99;
+}
+
+.contact-modal__error {
+  margin-top: 4px;
+  color: #ff8a8a;
+  font-size: 0.85rem;
+}
+
+.contact-modal__submit {
+  width: 100%;
+  margin-top: 14px;
+}
+
+@keyframes contactIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-modal__box { animation: none; }
+}
+
+.contact-modal__ok {
+  margin-top: 4px;
+  color: #9ef0b4;
+  font-size: 0.9rem;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}

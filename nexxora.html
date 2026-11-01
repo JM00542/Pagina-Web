@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NEXXORA</title>
+  <meta name="description" content="NEXXORA. Artistas, música y eventos.">
+  <meta name="theme-color" content="#05010d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hub.css">
+</head>
+
+<body>
+
+<!-- GRANO -->
+<div class="grain" aria-hidden="true"></div>
+
+<main class="gate">
+
+  <!-- ===== TÍTULO (edítalo aquí) ===== -->
+  <h1>NEXXORA</h1>
+  <p>El puente entre tu talento y el mundo. Da a conocer tu arte y encuentra a quienes vibran con él</p>
+  <p>Conoce nuestro trabajo y contáctanos para formar parte de la familia NEXXORA.</p>
+
+  <!-- ===== ARTISTAS =====
+       Para agregar uno nuevo, copia una línea <a class="btn"> y pégala debajo.
+       Cambia el href (la página que crees) y el nombre.
+
+       PLANTILLA:
+       <a class="btn" href="nombre-artista.html">NOMBRE</a>
+  -->
+  <nav class="artists" aria-label="Artistas">
+
+    <a class="btn fill" href="necio.html">NECIO</a>
+
+    <!-- Espacios libres: cuando tengas la página, cambia <span> por <a href="..."> -->
+    <span class="btn btn--empty" aria-disabled="true">Próximo artista</span>
+    <span class="btn btn--empty" aria-disabled="true">Próximo artista</span>
+
+  </nav>
+
+  <!-- ===== BOTÓN DE CONTACTO ===== -->
+  <button class="btn" type="button" id="contact-open">Contáctanos</button>
+
+</main>
+
+<!-- ===== MODAL DE CONTACTO ===== -->
+<div class="contact-modal" id="contact-modal" hidden>
+  <div class="contact-modal__box" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+    <button class="contact-modal__close" type="button" id="contact-close" aria-label="Cerrar">&times;</button>
+
+    <h2 id="contact-title">Contáctanos</h2>
+    <p class="contact-modal__description">Déjanos tus datos y te escribimos.</p>
+
+    <form id="contact-form" novalidate>
+      <label for="contact-name">Nombre</label>
+      <input id="contact-name" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" required>
+
+      <label for="contact-email">Correo</label>
+      <input id="contact-email" name="correo" type="email" autocomplete="email" placeholder="tu@correo.com" required>
+
+      <label for="contact-phone">Teléfono</label>
+      <input id="contact-phone" name="telefono" type="tel" autocomplete="tel" placeholder="+57 300 000 0000" required>
+
+
+      <p class="contact-modal__error" id="contact-error" hidden>Completa los tres campos con datos válidos.</p>
+
+      <p class="contact-modal__ok" id="contact-ok" role="status" hidden>¡Gracias! Recibimos tus datos.</p>
+
+      <button class="btn fill contact-modal__submit" type="submit">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<script src="supabase.js"></script>
+<script>
+  (function () {
+    const modal = document.getElementById('contact-modal');
+    const openBtn = document.getElementById('contact-open');
+    const closeBtn = document.getElementById('contact-close');
+    const form = document.getElementById('contact-form');
+    const error = document.getElementById('contact-error');
+    const nameInput = document.getElementById('contact-name');
+    const emailInput = document.getElementById('contact-email');
+    const phoneInput = document.getElementById('contact-phone');
+
+
+    function open() {
+      error.hidden = true;
+      document.getElementById('contact-ok').hidden = true;
+      modal.hidden = false;
+      nameInput.focus();
+    }
+
+    function close() {
+      modal.hidden = true;
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.hidden) close();
+    });
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const ok = document.getElementById('contact-ok');
+    const MENSAJE_VALIDACION = 'Completa los tres campos con datos válidos.';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ok.hidden = true;
+
+      const nombre = nameInput.value.trim();
+      const correo = emailInput.value.trim();
+      const telefono = phoneInput.value.trim();
+
+      const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+      const telefonoValido = telefono.replace(/\D/g, '').length >= 7;
+
+      if (!nombre || !correoValido || !telefonoValido) {
+        error.textContent = MENSAJE_VALIDACION;
+        error.hidden = false;
+        return;
+      }
+
+      error.hidden = true;
+      submitBtn.disabled = true;
+
+      try {
+        await guardarEnSupabase('contactos', { nombre, correo, telefono });
+        form.reset();
+        ok.hidden = false;
+        setTimeout(() => { if (!modal.hidden) close(); }, 1800);
+      } catch (err) {
+        console.error('No se pudo guardar el contacto:', err);
+        error.textContent = 'No pudimos enviar tus datos. Inténtalo de nuevo en un momento.';
+        error.hidden = false;
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
