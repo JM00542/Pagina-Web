@@ -68,6 +68,9 @@ if (
   }
 
   function openEmailModal() {
+    // El admin entra directo, sin el modal de suscripción
+    if (window.necioAdmin) return;
+
     // Si ya se suscribió previamente, no mostramos el modal
     if (almacen.get('nexxora_subscribed')) {
       console.info('Modal de correo omitido: este navegador ya se suscribió. Usa necio.html?reset para verlo de nuevo.');

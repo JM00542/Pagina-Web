@@ -47,6 +47,7 @@
   <p>¿Cómo quieres entrar?</p>
   <button class="btn fill" id="enter-sound" type="button">Entrar con sonido</button>
   <button class="btn" id="enter-silent" type="button">Entrar en silencio</button>
+  <button class="btn admin-entry" id="enter-admin" type="button">Admin</button>
 </div>
 
 <!-- Música de fondo -->
@@ -113,7 +114,7 @@
     </iframe>
 
     <h3>Releases</h3>
-    <div class="releases">
+    <div class="releases" id="lista-releases">
       <a class="release" href="https://music.youtube.com/watch?v=eZcFYMa-s64" target="_blank" rel="noopener noreferrer">
         <img src="https://yt3.googleusercontent.com/lQ50PLWq1FJasLTcOrKSk-A55QZu2jLQfzMXGzaXA_AhbRSQWYRA1R1ilvt7PXXEuQCtOLxrFVoseEM=w544-h544-l90-rj" alt="Portada de PALSE" width="320" height="320" loading="lazy">
         <strong>PALSE</strong>
@@ -200,7 +201,7 @@
   <div class="wrap">
     <p class="tag">05 — En cartel</p>
     <h2>Dónde ha tocado.</h2>
-    <div class="events">
+    <div class="events" id="lista-eventos">
 
       <article class="event">
         <img src="https://qnecio.com/assets/img/evento-vuelta-tribu.jpg" alt="Flyer de Vuelta a la Tribu, Sevilla" loading="lazy">
@@ -297,6 +298,7 @@
 </footer>
 
 <script src="supabase.js"></script>
+<script src="admin.js"></script>
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js" } }
 </script>

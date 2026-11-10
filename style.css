@@ -802,3 +802,89 @@ footer img {
     animation: none;
   }
 }
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
+#gate .admin-entry {
+  min-width: 0;
+  margin-top: 14px;
+  padding: 4px 8px;
+  border: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-decoration: underline;
+}
+
+.item { width: 100%; }
+.releases .item { width: 320px; max-width: 100%; }
+
+.admin-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.admin-actions .btn,
+.admin-add {
+  min-width: 0;
+  margin: 0 0 12px;
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: none;
+  color: var(--text);
+}
+
+.admin-actions .btn:hover,
+.admin-add:hover {
+  background: var(--accent);
+  color: #00030a;
+}
+
+.admin-bar {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 60;
+  padding: 8px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: rgba(0, 3, 10, 0.92);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.admin-bar button {
+  margin-left: 8px;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.admin-box {
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.admin-form { display: flex; flex-direction: column; gap: 10px; }
+
+.email-modal__box textarea {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 3, 10, 0.8);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.admin-form .btn { margin: 0; text-align: center; }
