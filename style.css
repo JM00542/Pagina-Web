@@ -376,11 +376,27 @@ iframe {
 .estados li {
   border-top: 2px solid var(--accent);
   padding-top: 14px;
+
+  background-color: rgba(7, 16, 34, 0.85);
+  padding: 24px;
+  border-radius: 12px;
+  margin: 32px 0 48px;
+
+
 }
+
 
 /* =========================================================
    8. BIO
    ========================================================= */
+.bio {
+  /* Fondo basado en tu color #071022 con transparencia */
+  background-color: rgba(7, 16, 34, 0.85);
+  padding: 24px;
+  border-radius: 12px;
+  margin: 32px 0 48px;
+}
+
 .bio p {
   max-width: 68ch;
   margin-bottom: 18px;
