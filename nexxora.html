@@ -25,19 +25,53 @@
   <p>Conoce nuestro trabajo y contáctanos para formar parte de la familia NEXXORA.</p>
 
   <!-- ===== ARTISTAS =====
-       Para agregar uno nuevo, copia una línea <a class="btn"> y pégala debajo.
-       Cambia el href (la página que crees) y el nombre.
+       Cada artista es una tarjeta con vista previa y descripción.
+       Para agregar uno nuevo, copia una tarjeta <a class="artist-card"> completa,
+       pégala debajo de la última y cambia: href, nombre y descripción.
 
-       PLANTILLA:
-       <a class="btn" href="nombre-artista.html">NOMBRE</a>
+       Para usar una captura real de la página, cambia el bloque
+       <div class="preview__screen">...</div> por:
+       <img src="preview-nombre.png" alt="">
   -->
   <nav class="artists" aria-label="Artistas">
 
-    <a class="btn fill" href="necio.html">NECIO</a>
+    <a class="artist-card" href="necio.html">
+      <div class="preview" aria-hidden="true">
+        <div class="preview__bar"><span></span><span></span><span></span></div>
+        <div class="preview__screen preview__screen--necio">
+          <b>NECIO</b>
+          <small>¿Cómo quieres entrar?</small>
+        </div>
+      </div>
+      <div class="artist-card__info">
+        <h2>NECIO</h2>
+        <p>Hypnotic, groovy y raw techno. Escucha sus lanzamientos y mira los eventos en los que participa.</p>
+        <span class="artist-card__cta">Entrar</span>
+      </div>
+    </a>
 
-    <!-- Espacios libres: cuando tengas la página, cambia <span> por <a href="..."> -->
-    <span class="btn btn--empty" aria-disabled="true">Próximo artista</span>
-    <span class="btn btn--empty" aria-disabled="true">Próximo artista</span>
+    <!-- Espacios libres: cuando tengas la página, cambia <div> por <a href="..."> -->
+    <div class="artist-card artist-card--empty" aria-disabled="true">
+      <div class="preview" aria-hidden="true">
+        <div class="preview__bar"><span></span><span></span><span></span></div>
+        <div class="preview__screen"><b>?</b></div>
+      </div>
+      <div class="artist-card__info">
+        <h2>Próximo artista</h2>
+        <p>Espacio disponible para un nuevo artista de NEXXORA.</p>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--empty" aria-disabled="true">
+      <div class="preview" aria-hidden="true">
+        <div class="preview__bar"><span></span><span></span><span></span></div>
+        <div class="preview__screen"><b>?</b></div>
+      </div>
+      <div class="artist-card__info">
+        <h2>Próximo artista</h2>
+        <p>Espacio disponible para un nuevo artista de NEXXORA.</p>
+      </div>
+    </div>
 
   </nav>
 
