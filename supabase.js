@@ -1,10 +1,5 @@
 /* =========================================================
    NEXXORA · CONEXIÓN CON SUPABASE
-   1) En Supabase: Project Settings → API
-   2) Copia "Project URL" y la clave "anon public" aquí abajo.
-   (La clave anon es pública por diseño; la seguridad la dan
-    las políticas RLS de supabase.sql. NUNCA pongas aquí la
-    clave "service_role".)
    ========================================================= */
 
 const SUPABASE_URL = 'https://czxktyczurphfzpzbbpp.supabase.co';
@@ -21,8 +16,7 @@ async function guardarEnSupabase(tabla, datos) {
     'Prefer': 'return=minimal'
   };
 
-  // Las claves nuevas (sb_publishable_...) no son JWT: solo van en "apikey".
-  // Las claves antiguas (eyJ...) también se envían como Bearer.
+  
   if (!SUPABASE_ANON_KEY.startsWith('sb_')) {
     headers['Authorization'] = 'Bearer ' + SUPABASE_ANON_KEY;
   }
@@ -35,17 +29,16 @@ async function guardarEnSupabase(tabla, datos) {
 
   if (respuesta.ok) return { ok: true };
 
-  // Leemos el detalle del error que devuelve Supabase
+  
   let detalle = {};
   try { detalle = await respuesta.json(); } catch (_) {}
   const codigo = detalle.code || '';
 
-  // Correo repetido (índice único): lo tratamos como éxito
+  // Correo repetido 
   if (respuesta.status === 409 || codigo === '23505') {
     return { ok: true, duplicado: true };
   }
 
-  // Mensaje claro en la consola (F12) para saber qué falló
   let pista = '';
   if (respuesta.status === 404 || codigo === 'PGRST205') {
     pista = 'La tabla "' + tabla + '" no existe. Ejecuta supabase.sql en el SQL Editor.';

@@ -15,8 +15,7 @@ const emailOk = document.getElementById('email-ok');
 
 const VOLUME = 0.5;
 
-// Acceso seguro a localStorage: algunos navegadores (p. ej. Edge con prevención
-// de rastreo estricta) lo bloquean y lanzan un error. Así no se rompe el modal.
+
 const almacen = {
   get(clave) {
     try { return localStorage.getItem(clave); } catch (_) { return null; }
@@ -38,7 +37,6 @@ if (
 ) {
   document.body.classList.add('locked');
 
-  // Para pruebas: abre necio.html?reset y se borra la marca de "ya suscrito"
   if (new URLSearchParams(window.location.search).has('reset')) {
     almacen.remove('nexxora_subscribed');
     almacen.remove('nexxora_user_email');
@@ -68,7 +66,7 @@ if (
   }
 
   function openEmailModal() {
-    // El admin entra directo, sin el modal de suscripción
+    // El admin entra directo
     if (window.necioAdmin) return;
 
     // Si ya se suscribió previamente, no mostramos el modal

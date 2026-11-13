@@ -1,6 +1,6 @@
 /* =========================================================
    NEXXORA · PÁGINA PRINCIPAL
-   Cambia el color principal editando estas variables
+  
    ========================================================= */
 :root {
   --bg: #05010d;
@@ -64,7 +64,7 @@ a {
 }
 
 /* =========================================================
-   PANTALLA PRINCIPAL (mismo diseño que la entrada de NECIO)
+   PANTALLA PRINCIPAL 
    ========================================================= */
 .gate {
   min-height: 100vh;
@@ -284,7 +284,7 @@ a.btn:focus-visible {
 
 
 /* =========================================================
-   TARJETAS DE ARTISTAS (vista previa en horizontal)
+   TARJETAS DE ARTISTAS 
    ========================================================= */
 .artists {
   flex-direction: row;

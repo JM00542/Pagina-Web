@@ -1,15 +1,13 @@
 /* =========================================================
    NECIO · LISTAS DESDE SUPABASE + PANEL DE ADMIN
    - Todos ven lanzamientos y eventos leídos de Supabase.
-   - Si Supabase no responde, se queda el contenido del HTML.
    - El admin inicia sesión y puede agregar, editar y eliminar.
    ========================================================= */
 (function () {
   'use strict';
 
   const KEY = SUPABASE_ANON_KEY;
-  // El usuario "Necio" se convierte en el correo necio@nexxora.com (así lo pide Supabase).
-  // Ese es el mismo correo con el que se crea el usuario en Supabase.
+ 
   const DOMINIO_ADMIN = 'nexxora.com';
   let token = null;
   let admin = false;
@@ -113,7 +111,7 @@
       e.codigo = d.error_code || '';
       throw e;
     }
-    token = d.access_token; // solo en memoria: al recargar hay que entrar de nuevo
+    token = d.access_token; 
   }
 
   async function cargar(tabla) {
